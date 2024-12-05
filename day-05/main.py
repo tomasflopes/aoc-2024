@@ -25,25 +25,11 @@ pages =[]
 for line in data[i:]:
     pages.append(line.strip().split(","))
 
-sum = 0
+p1 = 0
+p2 = 0
 for page in pages:
+    i=1
     valid = True
-    for n in page:
-        if n in ordering_rules:
-            for rule in ordering_rules[n]:
-                if rule in page[:page.index(n)]:
-                    valid = False
-                    break
-    
-    if valid:
-        sum += int(page[len(page) // 2])
-
-print("Part 1:", sum)
-
-sum = 0
-for page in pages:
-    valid = True
-    i = 0
     while i < len(page):
         n = page[i]
         if n in ordering_rules:
@@ -51,14 +37,16 @@ for page in pages:
                 if rule in page[:i]:
                     valid = False
                     j = page.index(rule)
-                    page[i], page[i-1] = page[i-1], page[i]
-                    i=0
+                    page[i], page[j] = page[j], page[i]
+                    i=j-1
                     break
 
         i+=1
     
-    if not valid:
-        print(page)
-        sum += int(page[len(page) // 2])
+    if valid:
+        p1 += int(page[len(page) // 2])
+    else:
+        p2 += int(page[len(page) // 2])
 
-print("Part 2: ", sum)
+print("Part 1:", p1)
+print("Part 2:", p2)
