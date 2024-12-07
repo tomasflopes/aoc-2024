@@ -4,11 +4,6 @@ FILE = 'input.txt'
 data = []
 print()
 
-def print_matrix(matrix):
-    for row in matrix:
-        print(row)
-    print()
-    
 with open(FILE, 'r') as f:
     data = f.readlines()
 
@@ -71,7 +66,5 @@ for (i,j) in seen_p1:
         x, y = x + directions[dir_counter][0], y + directions[dir_counter][1]
 
     matrix[i][j] = '.'
-        
 
 print("Part 2: ", p2)
-
