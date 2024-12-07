@@ -1,7 +1,7 @@
 from operator import add, mul
 
 
-FILE = 'input.txt'
+FILE = 'test.txt'
 
 data = []
 print()
@@ -30,13 +30,12 @@ def solve_p1(numbers, target, ops):
     return 0
         
 
-def solve_p2(numbers, target, ops):
+def solve_p2(numbers, target, ops, total):
     if len(numbers) == 1:
-        return target == numbers[0]
+        return target == total
 
     for op in ops:
-        res = op(numbers[0], numbers[1])
-        if solve_p2([res] + numbers[2:], target, ops):
+        if solve_p2(numbers[1:], target, ops, op(total, numbers[1])):
             return target
             
     return 0
@@ -56,6 +55,6 @@ for line in data:
     numbers = [int(x) for x in line.split(":")[1].split()]
     target = int(line.split(":")[0])
 
-    p2 += solve_p2(numbers, target, [add, mul, concat])
+    p2 += solve_p2(numbers, target, [add, mul, concat], numbers[0])
 
 print("Part 2: ", p2)
