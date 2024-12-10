@@ -2,9 +2,8 @@ from collections import defaultdict
 FILE = 'input.txt'
 
 data = []
-print()
 
-with open(FILE, 'r') as f:
+with open(0, 'r') as f:
     data = f.readlines()
 
 starting_pos = (0, 0)

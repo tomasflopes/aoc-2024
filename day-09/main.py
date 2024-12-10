@@ -1,9 +1,6 @@
-FILE = 'test.txt'
-
 data = []
-print()
 
-with open(FILE, 'r') as f:
+with open(0, 'r') as f:
     data = f.readline().strip()
 
 disk = []

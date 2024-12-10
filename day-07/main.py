@@ -1,12 +1,9 @@
 from operator import add, mul
 
 
-FILE = 'test.txt'
-
 data = []
-print()
 
-with open(FILE, 'r') as f:
+with open(0, 'r') as f:
     data = [x.strip() for x in f.readlines()]
 
 def concat(a, b):

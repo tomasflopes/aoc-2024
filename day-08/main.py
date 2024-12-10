@@ -1,7 +1,4 @@
-FILE = 'input.txt'
-
 data = []
-print()
 
 def is_valid(pos, data, key):
     x, y = pos
@@ -17,7 +14,7 @@ def draw_map(data, anti_nodes):
         print()
 
 
-with open(FILE, 'r') as f:
+with open(0, 'r') as f:
     data = [x.strip() for x in f.readlines()]
 
 nodes = {}

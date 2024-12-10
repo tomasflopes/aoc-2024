@@ -1,11 +1,9 @@
-FILE = 'input.txt'
 diffs = [(1, 0), (0, 1), (1, 1), (-1, 1), (1, -1), (-1, -1), (0, -1), (-1, 0)] 
 x_diffs = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
 
 data = []
-print()
 
-with open(FILE, 'r') as f:
+with open(0, 'r') as f:
     data = f.readlines()
 
 
