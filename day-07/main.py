@@ -16,25 +16,21 @@ def solve_p1(numbers, target, ops):
 
     for i in range(1, len(numbers)):
         for j in range(len(possible_results)):
-            for op in ops:
-                possible_results.append(op(possible_results[j], numbers[i]))
+            for op in ops: possible_results.append(op(possible_results[j], numbers[i]))
 
     final_results_count = 2 ** (len(numbers) - 1)
     possible_results = possible_results[-final_results_count:]
 
-    if target in possible_results:
-        return target
+    if target in possible_results: return target
 
     return 0
 
 
 def solve_p2(numbers, target, ops, total):
-    if len(numbers) == 1:
-        return target == total
+    if len(numbers) == 1: return target == total
 
     for op in ops:
-        if solve_p2(numbers[1:], target, ops, op(total, numbers[1])):
-            return target
+        if solve_p2(numbers[1:], target, ops, op(total, numbers[1])): return target
 
     return 0
 
@@ -46,7 +42,7 @@ for line in data:
 
     p1 += solve_p1(numbers, target, [add, mul])
 
-print("Part 1: ", p1)
+print("Part 1:", p1)
 
 p2 = 0
 for line in data:
@@ -55,4 +51,4 @@ for line in data:
 
     p2 += solve_p2(numbers, target, [add, mul, concat], numbers[0])
 
-print("Part 2: ", p2)
+print("Part 2:", p2)
