@@ -1,35 +1,15 @@
 import re
 
-
-data = []
-
 with open(0, "r") as f:
-    data = f.readlines()
-    data = "".join(data)
+    data = "".join(f.readlines())
 
-sum = 0
-p = r"mul\((\d{1,3}),(\d{1,3})\)"
-matches = re.findall(p, data)
+sum1 = sum(int(a) * int(b) for a, b in re.findall(r"mul\((\d{1,3}),(\d{1,3})\)", data))
+print("Part 1: ", sum1)
 
-for match in matches:
-    sum += int(match[0]) * int(match[1])
+sum2, multiply = 0, True
+for cmd, a, b in re.findall(r"(mul\((\d{1,3}),(\d{1,3})\)|do\(\)|don't\(\))", data):
+    if cmd == "do()": multiply = True
+    elif cmd == "don't()": multiply = False
+    elif multiply: sum2 += int(a) * int(b)
 
-print("Part 1: ", sum)
-
-p = r"(mul\((\d{1,3}),(\d{1,3})\)|do\(\)|don't\(\))"
-matches = re.findall(p, data)
-
-multiply = True
-sum = 0
-
-for exp in matches:
-    match exp[0]:
-        case "do()":
-            multiply = True
-        case "don't()":
-            multiply = False
-        case _:
-            if multiply:
-                sum += int(exp[1]) * int(exp[2])
-
-print("Part 2: ", sum)
+print("Part 2: ", sum2)

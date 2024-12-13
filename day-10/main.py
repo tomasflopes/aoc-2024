@@ -16,11 +16,7 @@ def walk(i, j, data, origin):
 
     for dx, dy in directions:
         x, y = i + dx, j + dy
-        if (
-            0 <= x < len(data)
-            and 0 <= y < len(data[0])
-            and data[x][y] - data[i][j] == 1
-        ):
+        if 0 <= x < len(data) and 0 <= y < len(data[0]) and data[x][y] - data[i][j] == 1:
             walk(x, y, data, origin)
 
 

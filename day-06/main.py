@@ -1,7 +1,5 @@
 from collections import defaultdict
 
-FILE = "input.txt"
-
 data = []
 
 with open(0, "r") as f:
@@ -27,13 +25,7 @@ while True:
     seen_p1.add((x, y))
 
     next_pos = (x + directions[dir_counter][0], y + directions[dir_counter][1])
-    if (
-        next_pos[0] < 0
-        or next_pos[0] >= len(data)
-        or next_pos[1] < 0
-        or next_pos[1] >= len(data[0])
-    ):
-        break
+    if next_pos[0] < 0 or next_pos[0] >= len(data) or next_pos[1] < 0 or next_pos[1] >= len(data[0]): break
 
     if data[next_pos[0]][next_pos[1]] == "#":
         dir_counter = (dir_counter + 1) % 4
@@ -56,8 +48,7 @@ for i, j in seen_p1:
 
     matrix[i][j] = "#"
     while True:
-        if x < 0 or x >= len(data) or y < 0 or y >= len(data[0]):
-            break
+        if x < 0 or x >= len(data) or y < 0 or y >= len(data[0]): break
         if matrix[x][y] == "#":
             x, y = x - directions[dir_counter][0], y - directions[dir_counter][1]
             dir_counter = (dir_counter + 1) % 4

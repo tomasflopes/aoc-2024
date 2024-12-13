@@ -9,13 +9,10 @@ is_free_space = True
 for c in data:
     n = int(c)
     is_free_space = not is_free_space
-    if n == 0:
-        continue
-    if is_free_space:
-        disk.append("." * n)
-        continue
-    disk.append([id] * n)
-    id += 1
+    if n == 0: continue
+
+    disk.append("." * n if is_free_space else [id] * n)
+    if not is_free_space: id += 1
 
 disk = [item for sublist in disk for item in sublist]
 disk_p2 = disk.copy()
@@ -24,13 +21,12 @@ j = 0
 for i in range(len(disk) - 1, -1, -1):
     while disk[j] != "." and j <= i:
         j += 1
-
     disk[j] = disk[i]
 
 disk = disk[:j] + ["."] * (len(disk) - j)
+
 dict = {}
 empty = []
-
 file = True
 id = 0
 i = 0
@@ -52,12 +48,8 @@ while i >= 0:
         continue
 
     length = dict[disk_p2[i]]
-    empty_index = -1
-    for j, element in enumerate(empty):
-        pos, empty_len = element
-        if empty_len >= length and pos < i:
-            empty_index = j
-            break
+    empty_index = next((j for j, (pos, empty_len) in enumerate(empty) if empty_len >= length and pos < i), -1)
+
     if empty_index != -1:
         k, pos = empty.pop(empty_index)
         for f in range(length):
@@ -68,12 +60,8 @@ while i >= 0:
             empty.insert(empty_index, (k, pos - length))
     i -= length
 
-p1, p2 = 0, 0
-for i in range(len(disk)):
-    if disk[i] != ".":
-        p1 += disk[i] * i
-    if disk_p2[i] != ".":
-        p2 += disk_p2[i] * i
+p1 = sum(disk[i] * i for i in range(len(disk)) if disk[i] != ".")
+p2 = sum(disk_p2[i] * i for i in range(len(disk_p2)) if disk_p2[i] != ".")
 
 print("Part 1:", p1)
 print("Part 2:", p2)

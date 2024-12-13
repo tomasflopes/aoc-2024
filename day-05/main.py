@@ -1,32 +1,20 @@
-data = []
-
 with open(0, "r") as f:
     data = f.readlines()
 
 ordering_rules = {}
-
 i = 0
 for line in data:
     i += 1
     line = line.strip()
-    if line == "":
-        break
+    if not line: break
     parts = line.split("|")
+    ordering_rules.setdefault(parts[0], []).append(parts[1])
 
-    if parts[0] not in ordering_rules:
-        ordering_rules[parts[0]] = []
+pages = [line.strip().split(",") for line in data[i:]]
 
-    ordering_rules[parts[0]].append(parts[1])
-
-pages = []
-for line in data[i:]:
-    pages.append(line.strip().split(","))
-
-p1 = 0
-p2 = 0
+p1, p2 = 0, 0
 for page in pages:
-    i = 1
-    valid = True
+    i, valid = 1, True
     while i < len(page):
         n = page[i]
         if n in ordering_rules:
@@ -37,7 +25,6 @@ for page in pages:
                     page[i], page[j] = page[j], page[i]
                     i = j - 1
                     break
-
         i += 1
 
     if valid:

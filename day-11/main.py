@@ -1,16 +1,11 @@
-from sys import setrecursionlimit
+from functools import cache
 
-setrecursionlimit(10**6)
 
 data = []
-ITERATIONS_P1 = 25
-ITERATIONS_P2 = 75
+ITERATIONS_P1, ITERATIONS_P2 = 25, 75
 
-
-def count_occ(n, steps, memo={}):
-    if (n, steps) in memo:
-        return memo[(n, steps)]
-
+@cache
+def count_occ(n, steps):
     if steps == 0:
         return 1
     if n == 0:
@@ -18,10 +13,7 @@ def count_occ(n, steps, memo={}):
     if len(str(n)) % 2 == 0:
         first_half = int(str(n)[: len(str(n)) // 2])
         second_half = int(str(n)[len(str(n)) // 2 :])
-        memo[(n, steps)] = count_occ(first_half, steps - 1) + count_occ(
-            second_half, steps - 1
-        )
-        return memo[(n, steps)]
+        return count_occ(first_half, steps - 1) + count_occ(second_half, steps - 1)
 
     return count_occ(n * 2024, steps - 1)
 
