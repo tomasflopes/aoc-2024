@@ -9,60 +9,35 @@ with open(0, 'r') as f:
 
 
 def solve_linear_system(A, B):
-    det_A = np.linalg.det(A)
-    
-    if det_A == 0:
+    try:
+        solution = np.linalg.solve(A, B)
+        return np.around(solution, 2)
+    except np.linalg.LinAlgError:
         return -1, -1
-    
-    A_x = A.copy()
-    A_x[:, 0] = B 
-    
-    A_y = A.copy()
-    A_y[:, 1] = B  
-    
-    det_A_x = np.linalg.det(A_x)
-    det_A_y = np.linalg.det(A_y)
-    
-    x = det_A_x / det_A
-    y = det_A_y / det_A
-    
-    return round(x, 2), round(y, 2)
+
+def is_valid_part1(x, y):
+    return not (x == -1 and y == -1 or x % 1 != 0 or y % 1 != 0 or x > 100 or y > 100)
+
+def is_valid_part2(x, y):
+    return not (x == -1 and y == -1 or x % 1 != 0 or y % 1 != 0)
 
 p1 = 0
 p2 = 0
 for i in range(0, len(data), 4):
-    button_a, button_b, prize = data[i], data[i+1], data[i+2]
-    xa, ya = re.findall(r'(\d+)', button_a)
-    xb, yb = re.findall(r'(\d+)', button_b)
-    res_x, res_y = re.findall(r'(\d+)', prize) 
-    res_x, res_y = int(res_x), int(res_y)
+    xa, ya, xb, yb, res_x, res_y = map(int, re.findall(r"(\d+)", "".join(data[i:i+3])))
     
-    A = np.array([[int(xa), int(xb)], [int(ya), int(yb)]])
+    A = np.array([[xa, xb], [ya, yb]])
     B1 = np.array([res_x, res_y])
     B2 = np.array([res_x + 10000000000000, res_y + 10000000000000])
 
     x, y = solve_linear_system(A, B1)
+    if is_valid_part1(x, y):
+        p1 += x * 3 + y
 
-    valid = True
-    if x == -1 and y == -1:
-        valid = False
-    if x % 1 != 0 or y % 1 != 0:
-        valid = False
-    if x > 100 or y > 100:
-        valid = False
-
-    p1 += x * 3 + y if valid else 0
-
-    # Part 2
     x, y = solve_linear_system(A, B2)
+    if is_valid_part2(x, y):
+        p2 += x * 3 + y
 
-    valid = True
-    if x == -1 and y == -1:
-        valid = False
-    if x % 1 != 0 or y % 1 != 0:
-        valid = False
-
-    p2 += x * 3 + y if valid else 0
 
 print("Part 1:", int(p1))
 print("Part 2:", int(p2))
