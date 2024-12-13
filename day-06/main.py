@@ -32,7 +32,7 @@ while True:
 
     current_pos = (x + directions[dir_counter][0], y + directions[dir_counter][1])
 
-print("Part 1: ", len(seen_p1))
+print("Part 1:", len(seen_p1))
 
 p2 = 0
 
@@ -63,4 +63,4 @@ for i, j in seen_p1:
 
     matrix[i][j] = "."
 
-print("Part 2: ", p2)
+print("Part 2:", p2)

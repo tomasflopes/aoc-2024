@@ -26,7 +26,7 @@ def find_x_occ(matrix, x, y):
 
 
 count = sum(find_xmas_occ(data, i, j) for i in range(len(data)) for j in range(len(data[i])))
-print("Part 1: ", count)
+print("Part 1:", count)
 
 count = sum(find_x_occ(data, i, j) for i in range(len(data)) for j in range(len(data[i])))
-print("Part 2: ", count)
+print("Part 2:", count)

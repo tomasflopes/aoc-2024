@@ -42,7 +42,7 @@ for line in data:
 
     p1 += solve_p1(numbers, target, [add, mul])
 
-print("Part 1: ", p1)
+print("Part 1:", p1)
 
 p2 = 0
 for line in data:
@@ -51,4 +51,4 @@ for line in data:
 
     p2 += solve_p2(numbers, target, [add, mul, concat], numbers[0])
 
-print("Part 2: ", p2)
+print("Part 2:", p2)

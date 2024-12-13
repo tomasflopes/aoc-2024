@@ -15,5 +15,5 @@ safe_levels = sum(get_unsafe_index(level) == -1 for level in data)
 part_2_safe_levels = sum(any(get_unsafe_index(level[:i] + level[i + 1:]) == -1 for i in range(len(level))) 
                       for level in data if get_unsafe_index(level) != -1)
 
-print("Part 1: ", safe_levels)
-print("Part 2: ", safe_levels + part_2_safe_levels)
+print("Part 1:", safe_levels)
+print("Part 2:", safe_levels + part_2_safe_levels)
