@@ -8,6 +8,7 @@ directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 trailheads = defaultdict(set)
 trailheads_p2 = defaultdict(list)
 
+
 def walk(i, j, data, origin):
     if data[i][j] == 9:
         trailheads[(i, j)].add(origin)
@@ -15,11 +16,15 @@ def walk(i, j, data, origin):
 
     for dx, dy in directions:
         x, y = i + dx, j + dy
-        if 0 <= x < len(data) and 0 <= y < len(data[0]) and data[x][y] - data[i][j] == 1:
+        if (
+            0 <= x < len(data)
+            and 0 <= y < len(data[0])
+            and data[x][y] - data[i][j] == 1
+        ):
             walk(x, y, data, origin)
 
 
-with open(0, 'r') as f:
+with open(0, "r") as f:
     data = [[int(x) for x in list(line.strip())] for line in f]
 
 for i in range(len(data)):

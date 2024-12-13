@@ -1,6 +1,6 @@
 data = []
 
-with open(0, 'r') as f:
+with open(0, "r") as f:
     data = f.readline().strip()
 
 disk = []
@@ -19,15 +19,15 @@ for c in data:
 
 disk = [item for sublist in disk for item in sublist]
 disk_p2 = disk.copy()
-    
+
 j = 0
 for i in range(len(disk) - 1, -1, -1):
-    while disk[j] != '.' and j <= i:
+    while disk[j] != "." and j <= i:
         j += 1
 
     disk[j] = disk[i]
 
-disk = disk[:j] + ['.'] * (len(disk) - j)
+disk = disk[:j] + ["."] * (len(disk) - j)
 dict = {}
 empty = []
 
@@ -65,16 +65,15 @@ while i >= 0:
             disk_p2[i - f] = "."
             k += 1
         if length < pos:
-            empty.insert(empty_index, (k, pos-length))
+            empty.insert(empty_index, (k, pos - length))
     i -= length
 
 p1, p2 = 0, 0
 for i in range(len(disk)):
-    if disk[i] != '.':
+    if disk[i] != ".":
         p1 += disk[i] * i
-    if disk_p2[i] != '.':
+    if disk_p2[i] != ".":
         p2 += disk_p2[i] * i
 
 print("Part 1:", p1)
 print("Part 2:", p2)
-

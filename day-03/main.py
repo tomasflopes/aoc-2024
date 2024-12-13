@@ -3,7 +3,7 @@ import re
 
 data = []
 
-with open(0, 'r') as f:
+with open(0, "r") as f:
     data = f.readlines()
     data = "".join(data)
 
@@ -33,4 +33,3 @@ for exp in matches:
                 sum += int(exp[1]) * int(exp[2])
 
 print("Part 2: ", sum)
-

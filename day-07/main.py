@@ -3,8 +3,9 @@ from operator import add, mul
 
 data = []
 
-with open(0, 'r') as f:
+with open(0, "r") as f:
     data = [x.strip() for x in f.readlines()]
+
 
 def concat(a, b):
     return int(str(a) + str(b))
@@ -17,7 +18,7 @@ def solve_p1(numbers, target, ops):
         for j in range(len(possible_results)):
             for op in ops:
                 possible_results.append(op(possible_results[j], numbers[i]))
-            
+
     final_results_count = 2 ** (len(numbers) - 1)
     possible_results = possible_results[-final_results_count:]
 
@@ -25,7 +26,7 @@ def solve_p1(numbers, target, ops):
         return target
 
     return 0
-        
+
 
 def solve_p2(numbers, target, ops, total):
     if len(numbers) == 1:
@@ -34,7 +35,7 @@ def solve_p2(numbers, target, ops, total):
     for op in ops:
         if solve_p2(numbers[1:], target, ops, op(total, numbers[1])):
             return target
-            
+
     return 0
 
 

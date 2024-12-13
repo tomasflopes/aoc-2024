@@ -1,4 +1,4 @@
 data = []
 
-with open(0, 'r') as f:
+with open(0, "r") as f:
     data = [line.strip() for line in f.readlines()]

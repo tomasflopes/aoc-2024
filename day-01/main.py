@@ -1,6 +1,6 @@
 data = []
 
-with open(0, 'r') as f:
+with open(0, "r") as f:
     data = f.read().splitlines()
 
 left, right = [], []
@@ -14,7 +14,7 @@ left.sort()
 right.sort()
 
 if len(left) != len(right):
-    print('lengths of left and right are not the same')
+    print("lengths of left and right are not the same")
     exit()
 
 # Part 1
