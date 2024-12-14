@@ -2,8 +2,6 @@ from math import prod
 import re
 
 
-data = []
-
 # WIDTH, HEIGHT = 11, 7
 WIDTH, HEIGHT = 101, 103
 P1_SECONDS = 100
