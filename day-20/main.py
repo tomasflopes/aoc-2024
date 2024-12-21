@@ -1,4 +1,5 @@
 import heapq
+from itertools import combinations
 
 
 data = []
@@ -62,19 +63,19 @@ for i, line in enumerate(data):
             grid[i][j] = 1
 
 path = dijkstra(grid, start_pos, end_pos)
+indexes = {pos: i for i, pos in enumerate(path)}
 
-good_cheats = []
-for i, (x, y) in enumerate(path):
-    for dx, dy in directions:
-        nx, ny = x + dx * 2, y + dy * 2
-        if nx < 0 or nx >= len(grid) or ny < 0 or ny >= len(grid[0]):
-            continue
+p1 = p2 = 0
+for (x, y), (nx, ny) in combinations(path, 2):
+    i = indexes[(x, y)]
+    index = indexes[(nx, ny)]
+    distance = abs(x - nx) + abs(y - ny)
+    diff = index - i - distance
 
-        if (nx, ny) in path:
-            index = path.index((nx, ny))
-            diff = index - i - 2
-            if diff >= GOOD_CHEAT:
-                good_cheats.append({"to": (nx, ny), "from": (x, y), "diff": diff})
+    if diff >= GOOD_CHEAT and distance == 2:
+        p1 += 1
+    if diff >= GOOD_CHEAT and distance <= 20:
+        p2 += 1
 
-print(good_cheats)
-print("Part 1:", len(good_cheats))
+print("Part 1:", p1)
+print("Part 2:", p2)
